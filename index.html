@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Bookshelf</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+     <!-- Compiled and minified CSS -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+
+     <!-- Compiled and minified JavaScript -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+     <script defer src="index.js"></script>
+     <script defer src="examples.js"></script>
+</head>
+<body>
+   <main class="container">
+        <div class="row">
+                <h1 class="center-align">Bookshelf</h1>
+        </div>
+        <div class="row">
+            <h3>Add a new book</h3>
+            <form action="/books" class="col s12">
+                <div class="row">
+                        <div class="input-field col s6">
+                                <input id="title" name="title" type="text" class="validate">
+                                <label for="title">Title</label>
+                        </div>
+
+                        <div class="input-field col s6">
+                                <input id="isbn" name="isbn" type="text" class="validate">
+                                <label for="isbn">ISBN</label>
+                        </div>
+                </div>
+                <div class="row">
+    
+                        <div class="input-field col s12">
+                                <textarea id="description" name="description" class="materialize-textarea"></textarea>
+                                <label for="description">Description</label>
+                        </div>
+    
+
+    
+                        <div class="input-field col s12">
+                                <input type="submit" class="waves-effect waves-light btn">
+                        </div>
+                </div>
+            </form>
+        </div>
+
+
+
+        <!-- collection list of books -->
+        <div class="row">
+            <ul class="collection">
+
+            </ul>
+        </div>
+   </main>
+</body>
+</html>
