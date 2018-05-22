@@ -3,7 +3,6 @@ const bookList = document.querySelector('ul')
 
 // event listeners
 form.addEventListener('submit', submitBook)
-// bookList.addEventListener('click', handleDelete)
 
 function createBookItem({id, title, description, isbn}) {
     // create an li
@@ -64,7 +63,7 @@ function submitBook(e) {
 
     e.preventDefault()
     const form = e.target.elements 
-    const title = form.title.value
+    const title = form.title.value 
     const description = form.description.value
     const isbn = form.isbn.value
 
@@ -73,9 +72,15 @@ function submitBook(e) {
         description, 
         isbn
     }
-
+    
     // post book
-
+    postBook(book)
+        .then(book => {
+            e.target.reset()
+            return createBookItem(book)
+        })
+        .then(el => addBookToList(el))
+        .catch(err => console.error(err))
 }
 
 async function postBook(book) {
@@ -87,8 +92,9 @@ async function postBook(book) {
         },
         body: JSON.stringify(book)
     }
-    
-
+    const response = await fetch(url, options)
+    const newBook = await response.json()
+    return newBook
 }
 
 
@@ -99,81 +105,6 @@ async function postBook(book) {
 
 
 
-// function handleDelete(e) {
-//     const li = e.target.parentElement
-//     const id = li.dataset.id
-//     if(e.target.tagName === 'BUTTON') {
-//         deleteBook(id)
-//             .then(() => {
-//                 li.parentNode.removeChild(li)
-//             })
-//             .catch(err => console.error(err))
-//     }
-// }
-
-// async function deleteBook(id) {
-//     const url = `http://localhost:3000/books/${id}`
-//     const options = {
-//         method: 'DELETE',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify({id: id})
-//     }
-//     const response = await fetch(url, options)
-//     return response
-// }
 
 
-
-
-
-
-
-
-// function submitBook(e) {
-//     e.preventDefault()
-
-//     const form = e.target.elements
-//     const title = form.title.value 
-//     const description = form.description.value 
-//     const isbn = form.isbn.value 
-    
-//     if(!title || !description || !isbn) {
-//         alert('please complete the form')
-//         return; 
-//     }
-
-//     const book =  {
-//         title, 
-//         description, 
-//         isbn
-//     }
-
-//     postBook(book)
-//     .then(newBook => {
-//         const bookElement = createBookItem(newBook)
-//         addBookToList(bookElement)
-//         e.target.reset()
-//     })
-//     .catch(e => console.error(e))
-
-// }
-
-// async function postBook(book) {
-//     const options = {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify(book),
-//         mode: 'cors'
-//     }
-
-//     const url = 'http://localhost:3000/books'
-//     const response = await fetch(url, options)
-//     const newBook = await response.json()
-    
-//     return newBook
-// }
 
